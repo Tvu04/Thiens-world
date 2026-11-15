@@ -91,8 +91,8 @@ document.addEventListener('click', e => {
 });
 
 // floating sparkles
-const sp = document.getElementById('sparkles'), bits = ['✦','✧','♡','⋆','✿','☁︎','★'];
-const cols = ['#ff8fb8','#a685c9','#7fb8f0','#6fcfa8','#ffb3c9'];
+const sp = document.getElementById('sparkles'), bits = ['✦','✧','♡','⋆','★'];
+const cols = ['#ff4fd8','#9d6bff','#3ee8ff','#4dffc3','#ffd36b'];
 function spawn(){
   const el = document.createElement('span'); el.className='float';
   el.textContent = bits[Math.random()*bits.length|0];
@@ -184,3 +184,22 @@ document.addEventListener('click',e=>{
   e.preventDefault(); document.body.classList.add('leaving'); setTimeout(()=>location.href=a.href,300);
 });
 addEventListener('pageshow',()=>document.body.classList.remove('leaving'));
+
+/* ================= ✦ GALAXY: stars + shooting stars ✦ ================= */
+(function(){
+  const box=document.createElement('div'); box.id='stars'; document.body.prepend(box);
+  const n = innerWidth<700 ? 70 : 140;
+  for(let i=0;i<n;i++){
+    const s=document.createElement('i'), z=Math.random()*2+.6;
+    Object.assign(s.style,{left:Math.random()*100+'%',top:Math.random()*100+'%',width:z+'px',height:z+'px',
+      animationDuration:(2+Math.random()*4)+'s',animationDelay:(-Math.random()*6)+'s',
+      boxShadow:`0 0 ${z*3}px ${['#fff','#ff9ef0','#9ff4ff','#cdb6ff'][i%4]}`});
+    box.appendChild(s);
+  }
+  if(reduce) return;
+  setInterval(()=>{
+    const s=document.createElement('span'); s.className='shoot';
+    s.style.left=(40+Math.random()*60)+'vw'; s.style.top=(Math.random()*40)+'vh';
+    document.body.appendChild(s); setTimeout(()=>s.remove(),1500);
+  }, 4500);
+})();
