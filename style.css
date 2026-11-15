@@ -173,8 +173,8 @@
 
 /* ================= ✦ FANCY UPGRADE ✦ ================= */
   body{animation:pagein .7s ease both}
-  @keyframes pagein{from{opacity:0;filter:blur(6px)}}
-  body.leaving{opacity:0;filter:blur(6px);transition:opacity .35s,filter .35s}
+  @keyframes pagein{from{opacity:0}}
+  body.leaving{opacity:0;transition:opacity .3s}
   body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
     background-image:radial-gradient(rgba(166,133,201,.18) 1.2px,transparent 1.2px);background-size:26px 26px;
     -webkit-mask-image:radial-gradient(ellipse at center,#000 30%,transparent 75%);mask-image:radial-gradient(ellipse at center,#000 30%,transparent 75%)}
@@ -394,3 +394,40 @@
 
   footer{color:var(--ink-soft)}
   footer .sig{color:#ff8ae6;filter:drop-shadow(0 0 10px rgba(255,79,216,.6))}
+
+/* ================= ✦ VALORANT VIEWER ✦ ================= */
+  .hint{font-family:'Quicksand';font-size:.8rem;font-weight:600;color:var(--neon-cyan);opacity:.8;margin-left:8px}
+  button.agent{font-family:'Quicksand';font-weight:700;font-size:.88rem;padding:5px 12px;border-radius:999px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:transform .2s,box-shadow .2s}
+  button.agent:hover{transform:translateY(-3px) scale(1.08);box-shadow:0 0 14px currentColor}
+  .agent-ic{width:22px;height:22px;border-radius:50%;object-fit:cover;margin-left:-6px;background:rgba(0,0,0,.25)}
+  .r-sent button.agent{background:rgba(77,255,195,.14);color:#7dffd4;border:1px solid rgba(77,255,195,.35)}
+  .r-duel button.agent{background:rgba(255,79,216,.14);color:#ff8ae6;border:1px solid rgba(255,79,216,.35)}
+  .r-ctrl button.agent{background:rgba(157,107,255,.16);color:#c7aaff;border:1px solid rgba(157,107,255,.4)}
+  .r-init button.agent{background:rgba(62,232,255,.13);color:#8af2ff;border:1px solid rgba(62,232,255,.35)}
+  button.map{font:inherit;cursor:pointer;width:100%;background-size:cover;background-position:center}
+  .map.has-img{height:110px}
+  .map.has-img span{text-shadow:0 2px 10px rgba(0,0,0,.7);font-size:1.3rem}
+  .rk-gem.has-img{animation:bob 2.6s ease-in-out infinite;text-shadow:none}
+  .rank-ic{width:56px;height:56px;object-fit:contain;filter:drop-shadow(0 0 10px rgba(255,255,255,.55))}
+  .credit{margin-top:22px;font-size:.75rem;color:var(--ink-soft);opacity:.75;text-align:center}
+
+  .viewer{position:fixed;inset:0;z-index:150;display:none;place-items:center;padding:20px;background:rgba(5,3,18,.75);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+  .viewer.open{display:grid}
+  .vbox{position:relative;width:100%;max-width:900px;max-height:92vh;overflow-y:auto;border-radius:28px;overflow:hidden;background:#120b2e;
+        border:1.5px solid rgba(157,107,255,.5);box-shadow:0 0 60px rgba(255,79,216,.35),0 30px 80px rgba(0,0,0,.6);animation:pop .4s cubic-bezier(.3,1.6,.6,1)}
+  .vclose{position:absolute;top:12px;right:12px;z-index:3;width:38px;height:38px;border-radius:50%;border:1px solid rgba(255,255,255,.3);
+          background:rgba(10,6,32,.6);color:#fff;font-size:1rem;cursor:pointer;transition:.2s}
+  .vclose:hover{transform:rotate(90deg);background:#ff4fd8}
+  .vart{position:relative;display:grid;place-items:center;overflow:hidden;background:linear-gradient(160deg,#2a0f4f,#0b2a52)}
+  .vbox.is-agent .vart{height:min(60vh,520px)}
+  .v-bgword{position:absolute;height:110%;opacity:.35;mix-blend-mode:screen;pointer-events:none}
+  .v-portrait{position:relative;height:100%;max-width:100%;object-fit:contain;filter:drop-shadow(0 10px 30px rgba(0,0,0,.5));animation:rise-in .6s ease both}
+  @keyframes rise-in{from{opacity:0;transform:translateY(30px) scale(.96)}}
+  .v-splash{width:100%;max-height:62vh;object-fit:cover;display:block;animation:rise-in .6s ease both}
+  .v-missing{font-size:4rem;color:var(--neon-pink);padding:60px}
+  .vinfo{padding:18px 26px 24px}
+  .vrole{display:inline-block;font-family:'Fredoka';font-size:.8rem;font-weight:500;color:#fff;padding:3px 12px;border-radius:999px;background:linear-gradient(135deg,#ff4fd8,#9d6bff)}
+  .vinfo h3{font-family:'Fredoka';font-size:2rem;margin:6px 0 4px;letter-spacing:1px;text-transform:uppercase;
+            background:linear-gradient(90deg,#ff4655,#ff4fd8,#c18bff);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .vinfo p{color:var(--ink-soft);line-height:1.5;font-size:.95rem}
+  .vinfo p:empty{display:none}

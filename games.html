@@ -6,7 +6,7 @@
 <title>Games I Play · Thien's Little World</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=galaxy1">
+<link rel="stylesheet" href="style.css?v=galaxy2">
 </head>
 <body data-page="games">
 <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
@@ -35,26 +35,27 @@
         <p class="feat-sub">PC · 5v5 tactical shooter</p>
       </div>
       <div class="ranks">
-        <div class="rank plat"><span class="rk-label">Current Rank</span><span class="rk-gem">◆</span><span class="rk-name">Platinum 2</span></div>
-        <div class="rank dia"><span class="rk-label">Peak Rank</span><span class="rk-gem">✦</span><span class="rk-name">Diamond 3</span></div>
+        <div class="rank plat"><span class="rk-label">Current Rank</span><span class="rk-gem" data-tier="PLATINUM 2">◆</span><span class="rk-name">Platinum 2</span></div>
+        <div class="rank dia"><span class="rk-label">Peak Rank</span><span class="rk-gem" data-tier="DIAMOND 3">✦</span><span class="rk-name">Diamond 3</span></div>
       </div>
     </div>
 
-    <h3 class="feat-h">Agents I Play the Most</h3>
+    <h3 class="feat-h">Agents I Play the Most <small class="hint">✦ tap an agent to see them</small></h3>
     <div class="roles">
-      <div class="role r-sent"><div class="role-name">🛡️ Sentinels</div><div class="agents"><span>Sage</span><span>Cypher</span><span>Killjoy</span></div></div>
-      <div class="role r-duel"><div class="role-name">⚡ Duelists</div><div class="agents"><span>Phoenix</span><span>Reyna</span><span>Iso</span></div></div>
-      <div class="role r-ctrl"><div class="role-name">🌫️ Controllers</div><div class="agents"><span>Omen</span><span>Brimstone</span></div></div>
-      <div class="role r-init"><div class="role-name">🔍 Initiators</div><div class="agents"><span>Sova</span><span>Skye</span><span>Gekko</span></div></div>
+      <div class="role r-sent"><div class="role-name">🛡️ Sentinels</div><div class="agents"><button type="button" class="agent" data-agent="Sage">Sage</button><button type="button" class="agent" data-agent="Cypher">Cypher</button><button type="button" class="agent" data-agent="Killjoy">Killjoy</button></div></div>
+      <div class="role r-duel"><div class="role-name">⚡ Duelists</div><div class="agents"><button type="button" class="agent" data-agent="Phoenix">Phoenix</button><button type="button" class="agent" data-agent="Reyna">Reyna</button><button type="button" class="agent" data-agent="Iso">Iso</button></div></div>
+      <div class="role r-ctrl"><div class="role-name">🌫️ Controllers</div><div class="agents"><button type="button" class="agent" data-agent="Omen">Omen</button><button type="button" class="agent" data-agent="Brimstone">Brimstone</button></div></div>
+      <div class="role r-init"><div class="role-name">🔍 Initiators</div><div class="agents"><button type="button" class="agent" data-agent="Sova">Sova</button><button type="button" class="agent" data-agent="Skye">Skye</button><button type="button" class="agent" data-agent="Gekko">Gekko</button></div></div>
     </div>
 
-    <h3 class="feat-h">Favorite Maps</h3>
+    <h3 class="feat-h">Favorite Maps <small class="hint">✦ tap a map to view it</small></h3>
     <div class="maps">
-      <div class="map m1"><span>Ascent</span></div>
-      <div class="map m2"><span>Bind</span></div>
-      <div class="map m3"><span>Haven</span></div>
-      <div class="map m4"><span>Split</span></div>
+      <button type="button" class="map m1" data-map="Ascent"><span>Ascent</span></button>
+      <button type="button" class="map m2" data-map="Bind"><span>Bind</span></button>
+      <button type="button" class="map m3" data-map="Haven"><span>Haven</span></button>
+      <button type="button" class="map m4" data-map="Split"><span>Split</span></button>
     </div>
+    <p class="credit">Valorant images via valorant-api.com · VALORANT © Riot Games. Fan page, not endorsed by Riot Games.</p>
   </article>
 
   <section id="games" class="page">
@@ -83,6 +84,14 @@
     <div class="row"><button type="button" class="cancel" id="cancel">Cancel</button><button type="submit" class="save">Save ♡</button></div>
   </form>
 </div>
-<script src="app.js?v=galaxy1"></script>
+<div class="viewer" id="viewer" aria-hidden="true">
+  <div class="vbox" id="vbox">
+    <button type="button" class="vclose" id="vclose" aria-label="Close">✕</button>
+    <div class="vart" id="vart"></div>
+    <div class="vinfo"><span class="vrole" id="vrole"></span><h3 id="vname"></h3><p id="vdesc"></p></div>
+  </div>
+</div>
+<script src="app.js?v=galaxy2"></script>
+<script src="valorant.js?v=1"></script>
 </body>
 </html>
