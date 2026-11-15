@@ -11,6 +11,8 @@
 <body data-page="home">
 <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
 <div id="sparkles"></div>
+<div id="progress"></div>
+<div class="grain"></div>
 <nav id="nav">
   <a href="index.html" data-p="home">🏠 Home</a>
   <a href="games.html" data-p="games">🎮 Games</a>
@@ -18,7 +20,8 @@
   <a href="music.html" data-p="music">🎧 Music</a>
   <a href="movies.html" data-p="movies">🎬 Movies/TV</a>
 </nav>
-<header>
+<header class="hero">
+  <span class="orb o1"></span><span class="orb o2"></span><span class="orb o3"></span><span class="ring r1"></span><span class="ring r2"></span>
   <div class="avatar"><div class="avatar-in">
     <svg viewBox="0 0 64 64"><defs><linearGradient id="hg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff8fb8"/><stop offset="1" stop-color="#a685c9"/></linearGradient></defs>
       <path d="M32 54s-20-12.5-20-27a11 11 0 0 1 20-6.3A11 11 0 0 1 52 27c0 14.5-20 27-20 27z" fill="url(#hg)"/>
@@ -26,11 +29,15 @@
   </div></div>
   <div class="hello">welcome to</div>
   <h1>Thien's Little World</h1>
-  <p class="tagline">✦ a cozy corner of things I love ✦</p>
+  <p class="tagline">✦ a cozy corner for <span class="typer" id="typer"></span><span class="caret">|</span> ✦</p>
   <div class="chips">
     <span class="chip">🎮 gamer</span><span class="chip">💗 k-culture fan</span><span class="chip">🎧 music lover</span><span class="chip">🍿 binge watcher</span>
   </div>
 </header>
+<div class="marquee" aria-hidden="true"><div class="track">
+  <span>✦ games</span><span>♡ k-drama</span><span>✧ k-pop</span><span>♪ music</span><span>✦ movies</span><span>♡ tv shows</span><span>✧ good vibes</span><span>♪ late-night playlists</span>
+  <span>✦ games</span><span>♡ k-drama</span><span>✧ k-pop</span><span>♪ music</span><span>✦ movies</span><span>♡ tv shows</span><span>✧ good vibes</span><span>♪ late-night playlists</span>
+</div></div>
 <main>
   <div class="homegrid">
     <a class="homecard" href="games.html"><div class="sec-icon ic-games">🎮</div><h2>Games I Play</h2><p>press start to see my favorite worlds ✧</p><span class="count" data-count="games"></span><div class="go">explore →</div></a>

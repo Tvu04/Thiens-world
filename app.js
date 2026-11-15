@@ -115,3 +115,72 @@ function burst(){
   }
 }
 
+
+/* ================= ✦ FANCY UPGRADE ✦ ================= */
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// scroll progress bar
+const bar = document.getElementById('progress');
+function prog(){ if(!bar) return; const h=document.documentElement; const max=h.scrollHeight-h.clientHeight; bar.style.width=(max>0? h.scrollTop/max*100:0)+'%'; }
+addEventListener('scroll', prog, {passive:true}); prog();
+
+// typewriter tagline on home
+const typer = document.getElementById('typer');
+if (typer){
+  const words=['games I play','K-dramas I binge','K-pop I stan','songs on repeat','movies I love'];
+  let w=0,c=0,del=false;
+  (function tick(){
+    const word=words[w]; typer.textContent=word.slice(0,c);
+    if(!del && c<word.length){c++; setTimeout(tick,85);}
+    else if(!del){del=true; setTimeout(tick,1600);}
+    else if(c>0){c--; setTimeout(tick,40);}
+    else {del=false; w=(w+1)%words.length; setTimeout(tick,300);}
+  })();
+}
+
+// 3D tilt + shine
+const fine = matchMedia('(pointer:fine)').matches;
+function addTilt(sel, max){
+  document.querySelectorAll(sel).forEach(el=>{
+    el.classList.add('tilt');
+    if(!fine||reduce) return;
+    el.addEventListener('mousemove',e=>{
+      const r=el.getBoundingClientRect(), x=(e.clientX-r.left)/r.width, y=(e.clientY-r.top)/r.height;
+      el.style.transform=`perspective(900px) rotateX(${(.5-y)*max}deg) rotateY(${(x-.5)*max}deg) translateY(-6px)`;
+      el.style.setProperty('--mx',x*100+'%'); el.style.setProperty('--my',y*100+'%');
+    });
+    el.addEventListener('mouseleave',()=>{ el.style.transform=''; });
+  });
+}
+addTilt('.homecard',10); addTilt('.rank',12); addTilt('.map',12); addTilt('.role',6);
+// re-apply to user cards after they render
+const grid=document.querySelector('.grid');
+if(grid) new MutationObserver(()=>addTilt('.card:not(.tilt)',10)).observe(grid,{childList:true});
+addTilt('.card',10);
+
+// ripple on buttons
+document.addEventListener('click',e=>{
+  const b=e.target.closest('.add-btn,.save'); if(!b) return;
+  const r=b.getBoundingClientRect(), s=document.createElement('span'), d=Math.max(r.width,r.height);
+  s.className='ripple'; Object.assign(s.style,{width:d+'px',height:d+'px',left:(e.clientX-r.left-d/2)+'px',top:(e.clientY-r.top-d/2)+'px'});
+  b.appendChild(s); setTimeout(()=>s.remove(),600);
+});
+
+// cursor sparkle trail
+if(fine && !reduce){
+  let last=0; const tb=['✦','✧','♡','⋆'];
+  addEventListener('mousemove',e=>{
+    const now=performance.now(); if(now-last<45) return; last=now;
+    const t=document.createElement('span'); t.className='trail';
+    t.textContent=tb[Math.random()*tb.length|0]; t.style.left=e.clientX+'px'; t.style.top=e.clientY+'px';
+    t.style.color=cols[Math.random()*cols.length|0]; t.style.fontSize=(9+Math.random()*9)+'px';
+    document.body.appendChild(t); setTimeout(()=>t.remove(),800);
+  },{passive:true});
+}
+
+// smooth page transitions
+document.addEventListener('click',e=>{
+  const a=e.target.closest('a[href$=".html"]'); if(!a||e.ctrlKey||e.metaKey||e.shiftKey) return;
+  e.preventDefault(); document.body.classList.add('leaving'); setTimeout(()=>location.href=a.href,300);
+});
+addEventListener('pageshow',()=>document.body.classList.remove('leaving'));
