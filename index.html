@@ -6,130 +6,18 @@
 <title>Thien's Little World</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --pink:#ffc8dd; --pink-d:#ff8fb8; --lav:#cdb4db; --lav-d:#a685c9;
-    --blue:#bde0fe; --blue-d:#7fb8f0; --mint:#c8f2e0; --mint-d:#6fcfa8;
-    --peach:#ffe5d0; --ink:#5b4a6b; --ink-soft:#8a7a99;
-    --glass:rgba(255,255,255,.55); --glass-b:rgba(255,255,255,.8);
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
-  body{
-    font-family:'Quicksand',sans-serif;color:var(--ink);min-height:100vh;overflow-x:hidden;
-    background:linear-gradient(135deg,#ffe4f0 0%,#f0e4ff 35%,#e2efff 70%,#fff0f6 100%);
-    background-attachment:fixed;
-  }
-  /* soft blobs */
-  .blob{position:fixed;border-radius:50%;filter:blur(60px);opacity:.55;z-index:0;pointer-events:none;animation:drift 18s ease-in-out infinite alternate}
-  .b1{width:420px;height:420px;background:var(--pink);top:-120px;left:-100px}
-  .b2{width:380px;height:380px;background:var(--lav);bottom:-120px;right:-80px;animation-delay:-6s}
-  .b3{width:300px;height:300px;background:var(--blue);top:40%;left:55%;animation-delay:-12s}
-  @keyframes drift{to{transform:translate(60px,40px) scale(1.1)}}
-  #sparkles{position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden}
-  .float{position:absolute;bottom:-40px;animation:rise linear infinite;opacity:.8;user-select:none}
-  @keyframes rise{0%{transform:translateY(0) rotate(0)}100%{transform:translateY(-115vh) rotate(360deg);opacity:0}}
-
-  main,header,nav,footer{position:relative;z-index:2}
-
-  /* nav */
-  nav{position:sticky;top:14px;display:flex;justify-content:center;margin:14px auto 0;width:max-content;max-width:94vw;
-      gap:6px;padding:8px;border-radius:999px;background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
-      border:1.5px solid var(--glass-b);box-shadow:0 8px 30px rgba(166,133,201,.18);flex-wrap:wrap;z-index:10}
-  nav a{font-family:'Fredoka';font-weight:500;font-size:.95rem;color:var(--ink);text-decoration:none;padding:8px 16px;border-radius:999px;transition:.25s}
-  nav a:hover,nav a.active{background:linear-gradient(135deg,var(--pink),var(--lav));color:#fff;box-shadow:0 4px 14px rgba(255,143,184,.4)}
-
-  /* hero */
-  header{text-align:center;padding:70px 20px 40px}
-  .avatar{width:120px;height:120px;margin:0 auto 22px;border-radius:50%;padding:5px;
-          background:conic-gradient(from 0deg,var(--pink-d),var(--lav-d),var(--blue-d),var(--mint-d),var(--pink-d));animation:spin 8s linear infinite}
-  .avatar-in{width:100%;height:100%;border-radius:50%;background:#fff;display:grid;place-items:center;animation:spin 8s linear infinite reverse}
-  .avatar-in svg{width:64px;height:64px}
-  @keyframes spin{to{transform:rotate(360deg)}}
-  .hello{font-family:'Dancing Script';font-size:1.7rem;color:var(--pink-d)}
-  h1{font-family:'Fredoka';font-weight:700;font-size:clamp(2.6rem,7vw,4.6rem);line-height:1.05;margin:4px 0 12px;
-     background:linear-gradient(90deg,#ff8fb8,#a685c9,#7fb8f0,#ff8fb8);background-size:300% 100%;
-     -webkit-background-clip:text;background-clip:text;color:transparent;animation:shimmer 6s linear infinite}
-  @keyframes shimmer{to{background-position:300% 0}}
-  .tagline{font-size:1.1rem;color:var(--ink-soft);font-weight:500}
-  .chips{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:22px}
-  .chip{padding:7px 16px;border-radius:999px;background:var(--glass);border:1.5px solid var(--glass-b);font-weight:600;font-size:.9rem;backdrop-filter:blur(8px)}
-
-  /* sections */
-  main{max-width:1100px;margin:0 auto;padding:10px 20px 60px;display:flex;flex-direction:column;gap:44px}
-  section{scroll-margin-top:90px;background:var(--glass);border:1.5px solid var(--glass-b);border-radius:32px;padding:34px 30px 30px;
-          backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 12px 40px rgba(166,133,201,.15);
-          opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s ease}
-  section.show{opacity:1;transform:none}
-  .sec-head{display:flex;align-items:center;gap:16px;margin-bottom:6px;flex-wrap:wrap}
-  .sec-icon{width:58px;height:58px;border-radius:20px;display:grid;place-items:center;font-size:1.8rem;box-shadow:0 6px 18px rgba(0,0,0,.06)}
-  .sec-head h2{font-family:'Fredoka';font-weight:600;font-size:clamp(1.6rem,3.5vw,2.1rem)}
-  .sec-sub{color:var(--ink-soft);font-weight:500;margin:2px 0 22px 74px}
-  .add-btn{margin-left:auto;font-family:'Fredoka';font-weight:500;border:none;cursor:pointer;color:#fff;padding:10px 20px;border-radius:999px;font-size:.95rem;
-           transition:transform .2s,box-shadow .2s}
-  .add-btn:hover{transform:translateY(-2px) scale(1.04)}
-
-  #games .sec-icon{background:var(--blue)} #games .add-btn{background:linear-gradient(135deg,var(--blue-d),var(--lav-d));box-shadow:0 6px 16px rgba(127,184,240,.4)}
-  #kpop .sec-icon{background:var(--pink)}  #kpop .add-btn{background:linear-gradient(135deg,var(--pink-d),var(--lav-d));box-shadow:0 6px 16px rgba(255,143,184,.4)}
-  #music .sec-icon{background:var(--lav)}  #music .add-btn{background:linear-gradient(135deg,var(--lav-d),var(--pink-d));box-shadow:0 6px 16px rgba(166,133,201,.4)}
-  #movies .sec-icon{background:var(--mint)}#movies .add-btn{background:linear-gradient(135deg,var(--mint-d),var(--blue-d));box-shadow:0 6px 16px rgba(111,207,168,.4)}
-
-  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:18px}
-  .card{position:relative;background:rgba(255,255,255,.75);border:1.5px solid #fff;border-radius:22px;overflow:hidden;
-        transition:transform .3s,box-shadow .3s;animation:pop .45s cubic-bezier(.3,1.6,.6,1)}
-  @keyframes pop{from{transform:scale(.7);opacity:0}}
-  .card:hover{transform:translateY(-6px) rotate(-.6deg);box-shadow:0 14px 30px rgba(166,133,201,.25)}
-  .card .cover{height:130px;display:grid;place-items:center;font-size:2.6rem;background-size:cover;background-position:center}
-  .card .body{padding:14px 16px 16px}
-  .card h3{font-family:'Fredoka';font-weight:600;font-size:1.1rem;margin-bottom:3px}
-  .card .meta{font-size:.85rem;color:var(--ink-soft);font-weight:600}
-  .card .note{font-size:.88rem;margin-top:8px;line-height:1.4}
-  .hearts{margin-top:8px;color:var(--pink-d);letter-spacing:2px;font-size:.95rem}
-  .del{position:absolute;top:8px;right:8px;width:30px;height:30px;border-radius:50%;border:none;background:rgba(255,255,255,.9);
-       color:var(--ink-soft);cursor:pointer;opacity:0;transition:.2s;font-size:1rem}
-  .card:hover .del{opacity:1} .del:hover{color:#e2557f;transform:rotate(90deg)}
-  @media (hover:none){.del{opacity:.85}}
-
-  .empty{grid-column:1/-1;text-align:center;padding:38px 20px;border:2px dashed rgba(166,133,201,.4);border-radius:22px;color:var(--ink-soft)}
-  .empty .big{font-size:2.4rem;display:block;margin-bottom:8px;animation:bob 2.4s ease-in-out infinite}
-  @keyframes bob{50%{transform:translateY(-8px)}}
-  .empty p{font-weight:600}
-
-  /* modal */
-  .overlay{position:fixed;inset:0;background:rgba(91,74,107,.25);backdrop-filter:blur(6px);display:none;place-items:center;z-index:50;padding:20px}
-  .overlay.open{display:grid}
-  .modal{width:100%;max-width:420px;background:linear-gradient(160deg,#fff,#fff4fa);border-radius:28px;padding:28px;box-shadow:0 20px 60px rgba(91,74,107,.25);animation:pop .35s cubic-bezier(.3,1.6,.6,1)}
-  .modal h3{font-family:'Fredoka';font-size:1.5rem;margin-bottom:16px}
-  .modal label{display:block;font-weight:700;font-size:.85rem;margin:12px 0 5px}
-  .modal input,.modal textarea{width:100%;font-family:'Quicksand';font-weight:600;font-size:.95rem;color:var(--ink);padding:11px 14px;border-radius:14px;border:1.5px solid var(--lav);background:#fff;outline:none;transition:.2s}
-  .modal input:focus,.modal textarea:focus{border-color:var(--pink-d);box-shadow:0 0 0 4px rgba(255,143,184,.18)}
-  .modal textarea{resize:vertical;min-height:70px}
-  .rate{display:flex;gap:4px;font-size:1.5rem;cursor:pointer;user-select:none}
-  .rate span{color:#e6d9ef;transition:.15s} .rate span.on{color:var(--pink-d);transform:scale(1.1)}
-  .row{display:flex;gap:10px;margin-top:22px}
-  .row button{flex:1;font-family:'Fredoka';font-weight:500;font-size:1rem;padding:12px;border-radius:999px;border:none;cursor:pointer}
-  .cancel{background:#f1e8f7;color:var(--ink)}
-  .save{background:linear-gradient(135deg,var(--pink-d),var(--lav-d));color:#fff;box-shadow:0 6px 16px rgba(255,143,184,.4)}
-  .file-note{font-size:.78rem;color:var(--ink-soft);margin-top:4px}
-
-  footer{text-align:center;padding:10px 20px 40px;color:var(--ink-soft);font-weight:600}
-  footer .sig{font-family:'Dancing Script';font-size:1.5rem;color:var(--lav-d)}
-
-  @media(max-width:600px){.sec-sub{margin-left:0}.add-btn{margin-left:0}section{padding:26px 18px}nav a{padding:7px 11px;font-size:.85rem}}
-  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}section{opacity:1;transform:none}}
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body data-page="home">
 <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
 <div id="sparkles"></div>
-
 <nav id="nav">
-  <a href="#games">🎮 Games</a>
-  <a href="#kpop">💗 K-Drama/K-Pop</a>
-  <a href="#music">🎧 Music</a>
-  <a href="#movies">🎬 Movies/TV</a>
+  <a href="index.html" data-p="home">🏠 Home</a>
+  <a href="games.html" data-p="games">🎮 Games</a>
+  <a href="kpop.html" data-p="kpop">💗 K-Drama/K-Pop</a>
+  <a href="music.html" data-p="music">🎧 Music</a>
+  <a href="movies.html" data-p="movies">🎬 Movies/TV</a>
 </nav>
-
 <header>
   <div class="avatar"><div class="avatar-in">
     <svg viewBox="0 0 64 64"><defs><linearGradient id="hg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff8fb8"/><stop offset="1" stop-color="#a685c9"/></linearGradient></defs>
@@ -143,38 +31,18 @@
     <span class="chip">🎮 gamer</span><span class="chip">💗 k-culture fan</span><span class="chip">🎧 music lover</span><span class="chip">🍿 binge watcher</span>
   </div>
 </header>
-
 <main>
-  <section id="games">
-    <div class="sec-head"><div class="sec-icon">🎮</div><h2>Games I Play</h2><button class="add-btn" data-sec="games">+ Add game</button></div>
-    <p class="sec-sub">press start to see my favorite worlds ✧</p>
-    <div class="grid" id="grid-games"></div>
-  </section>
-
-  <section id="kpop">
-    <div class="sec-head"><div class="sec-icon">💗</div><h2>K-Drama &amp; K-Pop</h2><button class="add-btn" data-sec="kpop">+ Add favorite</button></div>
-    <p class="sec-sub">dramas that made me cry and idols I stan ♡</p>
-    <div class="grid" id="grid-kpop"></div>
-  </section>
-
-  <section id="music">
-    <div class="sec-head"><div class="sec-icon">🎧</div><h2>Songs &amp; Artists</h2><button class="add-btn" data-sec="music">+ Add song</button></div>
-    <p class="sec-sub">what's on repeat in my headphones ♪</p>
-    <div class="grid" id="grid-music"></div>
-  </section>
-
-  <section id="movies">
-    <div class="sec-head"><div class="sec-icon">🎬</div><h2>Movies &amp; TV Shows</h2><button class="add-btn" data-sec="movies">+ Add title</button></div>
-    <p class="sec-sub">grab some popcorn, these are my comfort watches 🍿</p>
-    <div class="grid" id="grid-movies"></div>
-  </section>
+  <div class="homegrid">
+    <a class="homecard" href="games.html"><div class="sec-icon ic-games">🎮</div><h2>Games I Play</h2><p>press start to see my favorite worlds ✧</p><span class="count" data-count="games"></span><div class="go">explore →</div></a>
+    <a class="homecard" href="kpop.html"><div class="sec-icon ic-kpop">💗</div><h2>K-Drama &amp; K-Pop</h2><p>dramas that made me cry and idols I stan ♡</p><span class="count" data-count="kpop"></span><div class="go">explore →</div></a>
+    <a class="homecard" href="music.html"><div class="sec-icon ic-music">🎧</div><h2>Songs &amp; Artists</h2><p>what's on repeat in my headphones ♪</p><span class="count" data-count="music"></span><div class="go">explore →</div></a>
+    <a class="homecard" href="movies.html"><div class="sec-icon ic-movies">🎬</div><h2>Movies &amp; TV Shows</h2><p>grab some popcorn, these are my comfort watches 🍿</p><span class="count" data-count="movies"></span><div class="go">explore →</div></a>
+  </div>
 </main>
-
 <footer>
   <div class="sig">made with love ♡ Thien</div>
   <p>✦ thanks for stopping by ✦</p>
 </footer>
-
 <div class="overlay" id="overlay">
   <form class="modal" id="form">
     <h3 id="m-title">Add something ✨</h3>
@@ -192,121 +60,6 @@
     <div class="row"><button type="button" class="cancel" id="cancel">Cancel</button><button type="submit" class="save">Save ♡</button></div>
   </form>
 </div>
-
-<script>
-const CFG = {
-  games:  {label:'game',   meta:'Platform / genre', ph:'e.g. PC · RPG',            emoji:['🎮','🕹️','👾','⚔️','🌟'], bg:['#bde0fe','#cdb4db']},
-  kpop:   {label:'favorite',meta:'Drama or group / bias', ph:'e.g. K-Drama · romance', emoji:['💗','🌸','🎤','💌','🫶'], bg:['#ffc8dd','#cdb4db']},
-  music:  {label:'song',   meta:'Artist',           ph:'e.g. artist name',         emoji:['🎧','🎵','💿','🎶','🌙'], bg:['#cdb4db','#ffc8dd']},
-  movies: {label:'title',  meta:'Type / year',      ph:'e.g. Movie · 2024',        emoji:['🎬','🍿','📺','🎞️','⭐'], bg:['#c8f2e0','#bde0fe']}
-};
-const EMPTY = {
-  games:  ['🕹️','No games yet — tap “+ Add game” to start your collection!'],
-  kpop:   ['🌸','Waiting for your favorite dramas & idols…'],
-  music:  ['💿','Your playlist is empty — add a song you love!'],
-  movies: ['🍿','Popcorn’s ready — add your first movie or show!']
-};
-const KEY = 'thien-little-world-v1';
-let data = {games:[],kpop:[],music:[],movies:[]};
-try { const s = JSON.parse(localStorage.getItem(KEY)); if (s) data = Object.assign(data, s); } catch(e){}
-const persist = () => { try { localStorage.setItem(KEY, JSON.stringify(data)); } catch(e){} };
-
-const esc = s => String(s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-
-function render(sec){
-  const g = document.getElementById('grid-'+sec), c = CFG[sec];
-  if (!data[sec].length){ g.innerHTML = `<div class="empty"><span class="big">${EMPTY[sec][0]}</span><p>${EMPTY[sec][1]}</p></div>`; return; }
-  g.innerHTML = data[sec].map((it,i) => {
-    const em = c.emoji[i % c.emoji.length];
-    const cover = it.img ? `style="background-image:url('${it.img}')"` : `style="background:linear-gradient(135deg,${c.bg[0]},${c.bg[1]})"`;
-    return `<div class="card">
-      <button class="del" title="Remove" data-sec="${sec}" data-i="${i}">✕</button>
-      <div class="cover" ${cover}>${it.img ? '' : em}</div>
-      <div class="body"><h3>${esc(it.name)}</h3>${it.meta?`<div class="meta">${esc(it.meta)}</div>`:''}
-      ${it.note?`<p class="note">${esc(it.note)}</p>`:''}
-      ${it.rate?`<div class="hearts">${'♥'.repeat(it.rate)}${'♡'.repeat(5-it.rate)}</div>`:''}</div></div>`;
-  }).join('');
-}
-Object.keys(CFG).forEach(render);
-
-// modal
-const ov = document.getElementById('overlay'), form = document.getElementById('form');
-let cur = null, rate = 0, imgData = '';
-const stars = [...document.querySelectorAll('#rate span')];
-const paint = n => stars.forEach((s,i)=>s.classList.toggle('on', i<n));
-stars.forEach((s,i)=>{ s.onclick=()=>{rate=i+1;paint(rate)}; s.onmouseenter=()=>paint(i+1); });
-document.getElementById('rate').onmouseleave=()=>paint(rate);
-
-document.querySelectorAll('.add-btn').forEach(b => b.onclick = () => {
-  cur = b.dataset.sec; const c = CFG[cur];
-  form.reset(); rate = 0; imgData = ''; paint(0);
-  document.getElementById('m-title').textContent = `Add a ${c.label} ✨`;
-  document.getElementById('l-meta').textContent = c.meta;
-  document.getElementById('f-meta').placeholder = c.ph;
-  ov.classList.add('open'); setTimeout(()=>document.getElementById('f-name').focus(),50);
-});
-const close = () => ov.classList.remove('open');
-document.getElementById('cancel').onclick = close;
-ov.onclick = e => { if (e.target === ov) close(); };
-document.addEventListener('keydown', e => { if (e.key==='Escape') close(); });
-
-document.getElementById('f-img').onchange = e => {
-  const f = e.target.files[0]; if (!f) return;
-  const img = new Image(), r = new FileReader();
-  r.onload = () => { img.onload = () => { // shrink so it saves nicely
-      const cv = document.createElement('canvas'), s = Math.min(1, 480/img.width);
-      cv.width = img.width*s; cv.height = img.height*s;
-      cv.getContext('2d').drawImage(img,0,0,cv.width,cv.height);
-      imgData = cv.toDataURL('image/jpeg', .8); }; img.src = r.result; };
-  r.readAsDataURL(f);
-};
-
-form.onsubmit = e => {
-  e.preventDefault();
-  data[cur].push({ name: f('name'), meta: f('meta'), note: f('note'), rate, img: imgData });
-  persist(); render(cur); close();
-  burst();
-};
-function f(id){ return document.getElementById('f-'+id).value.trim(); }
-
-document.querySelector('main').addEventListener('click', e => {
-  const d = e.target.closest('.del'); if (!d) return;
-  data[d.dataset.sec].splice(+d.dataset.i, 1); persist(); render(d.dataset.sec);
-});
-
-// floating sparkles
-const sp = document.getElementById('sparkles'), bits = ['✦','✧','♡','⋆','✿','☁︎','★'];
-const cols = ['#ff8fb8','#a685c9','#7fb8f0','#6fcfa8','#ffb3c9'];
-function spawn(){
-  const el = document.createElement('span'); el.className='float';
-  el.textContent = bits[Math.random()*bits.length|0];
-  el.style.left = Math.random()*100+'vw';
-  el.style.fontSize = (10+Math.random()*18)+'px';
-  el.style.color = cols[Math.random()*cols.length|0];
-  el.style.animationDuration = (10+Math.random()*12)+'s';
-  sp.appendChild(el); setTimeout(()=>el.remove(), 23000);
-}
-if (!matchMedia('(prefers-reduced-motion: reduce)').matches){ for(let i=0;i<10;i++) setTimeout(spawn, i*700); setInterval(spawn, 1300); }
-
-function burst(){
-  for (let i=0;i<14;i++){
-    const el = document.createElement('span'); el.textContent = bits[i%bits.length];
-    Object.assign(el.style,{position:'fixed',left:'50%',top:'50%',zIndex:60,pointerEvents:'none',fontSize:'20px',color:cols[i%cols.length],transition:'all .9s ease-out'});
-    document.body.appendChild(el);
-    const a = Math.PI*2*i/14, d = 120+Math.random()*80;
-    requestAnimationFrame(()=>{ el.style.transform=`translate(${Math.cos(a)*d}px,${Math.sin(a)*d}px) scale(.4)`; el.style.opacity=0; });
-    setTimeout(()=>el.remove(),1000);
-  }
-}
-
-// reveal + active nav
-const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) e.target.classList.add('show'); }), {threshold:.12});
-document.querySelectorAll('section').forEach(s => io.observe(s));
-const links = [...document.querySelectorAll('nav a')];
-addEventListener('scroll', () => {
-  let id = ''; document.querySelectorAll('section').forEach(s => { if (s.getBoundingClientRect().top < 200) id = s.id; });
-  links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#'+id));
-}, {passive:true});
-</script>
+<script src="app.js"></script>
 </body>
 </html>
