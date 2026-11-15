@@ -6,7 +6,7 @@ const CFG = {
   movies: {label:'title',  meta:'Type / year',      ph:'e.g. Movie · 2024',        emoji:['🎬','🍿','📺','🎞️','⭐'], bg:['#c8f2e0','#bde0fe']}
 };
 const EMPTY = {
-  games:  ['🕹️','No games yet — tap “+ Add game” to start your collection!'],
+  games:  ['🕹️','Tap “+ Add game” to add more games you play!'],
   kpop:   ['🌸','Waiting for your favorite dramas & idols…'],
   music:  ['💿','Your playlist is empty — add a song you love!'],
   movies: ['🍿','Popcorn’s ready — add your first movie or show!']
@@ -36,12 +36,14 @@ function render(sec){
 
 
 const PAGE=document.body.dataset.page;
+// items built into the pages (not added through the + button)
+const STATIC={games:1};
 // nav highlight
 document.querySelectorAll('nav a').forEach(a=>{ if(a.dataset.p===PAGE) a.classList.add('active'); });
 // home counts
-document.querySelectorAll('[data-count]').forEach(el=>{ const n=data[el.dataset.count].length; el.textContent = n ? n+' saved ♡' : 'nothing yet ✧'; });
+document.querySelectorAll('[data-count]').forEach(el=>{ const n=data[el.dataset.count].length+(STATIC[el.dataset.count]||0); el.textContent = n ? n+' saved ♡' : 'nothing yet ✧'; });
 if (CFG[PAGE]) { render(PAGE); updateCount(); }
-function updateCount(){ const el=document.getElementById('count'); if(el){ const n=data[PAGE].length; el.textContent = n+(n===1?' item':' items'); } }
+function updateCount(){ const el=document.getElementById('count'); if(el){ const n=data[PAGE].length+(STATIC[PAGE]||0); el.textContent = n+(n===1?' item':' items'); } }
 const _render=render; render=function(s){ _render(s); updateCount(); };
 // modal
 const ov = document.getElementById('overlay'), form = document.getElementById('form');
